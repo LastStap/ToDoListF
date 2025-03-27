@@ -1,0 +1,15 @@
+        <div class="mb-3">
+            <label for="role" class="form-label">Choose a role:</label>
+            <select name="role" id="role" class="form-select">
+                <option value="ADMIN">Admin</option>
+                <option value="USER">User</option>
+                <option value="PERSON">Person</option>
+            </select>
+        </div>
+
+const roleInput = document.querySelector("#role");
+
+    const role = roleInput.value;
+
+    console.log("ROLE -> ", role);
+
