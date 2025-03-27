@@ -1,59 +1,50 @@
 const token = localStorage.getItem("JWT");
 
-if (token != null) {
-    location.href = "../pages/tasks.html";
+if (token != null && !window.location.href.includes("createTask.html")) {
+    location.href = "../pages/createTask.html";
 }
 
-const signUpForm = document.querySelector("#signUpForm");
+const createTaskForm = document.querySelector("#createTaskForm");
 
-const usernameInput = document.querySelector("#username");
-const emailInput = document.querySelector("#email");
-const passwordInput = document.querySelector("#password");
-const alertsContainer = document.querySelector("#alerts");
+const titleInput = document.querySelector("#title");
+const descriptionInput = document.querySelector("#description");
+const statusInput = document.querySelector("#status");
+const priorityInput = document.querySelector("#priority");
 
-signUpForm.addEventListener("submit", async function (event) {
+createTaskForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    await signUp();
+    await createTask();
 });
 
-async function signUp() {
+async function createTask() {
 
-    const username = usernameInput.value;
-    const email = emailInput.value;
-    const password = passwordInput.value;
+    const title = titleInput.value;
+    const description = descriptionInput.value;
+    const status = statusInput.value;
+    const priority = priorityInput.value;
 
-    const signUpRequestBody = {
-        username: username,
-        email: email,
-        password: password,
+    const createTaskRequestBody = {
+        title: title,
+        description: description,
+        status: status,
+        priority: priority,
     };
 
-    const response = await fetch("http://localhost:8080/sign-up", {
+    const response = await fetch("http://localhost:8080/tasks", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(signUpRequestBody),
+        body: JSON.stringify(createTaskRequestBody),
     });
 
     if (response.ok) {
 
-        alertsContainer.innerHTML = `
-            <div class="alert alert-success">
-              Sign Up Successfully!
-            </div>
-        `;
-
-        setTimeout(function () {
-            location.href = "/pages/login.html";
-        }, 2000);
-
+        alert("Task created successfully.");
+        location.href = "../pages/tasks.html";
     } else {
-        alertsContainer.innerHTML = `
-            <div class="alert alert-danger">
-              Sign up Failed!
-            </div>
-        `;
+        alert("Task creation Failed!");
     }
 }

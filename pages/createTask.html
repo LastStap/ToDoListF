@@ -10,36 +10,52 @@
 <body>
 
 <header class="text-center p-3 bg-success text-white">
-    <h1>Sign Up</h1>
+    <h1>Create Task</h1>
 </header>
 
 <nav class="navbar bg-light shadow justify-content-center">
     <button id="logoutButton" class="btn btn-danger">Logout</button>
+    <a href="tasks.html">
+        <button id="backButton" class="btn btn-primary">Back</button>
+    </a>
 </nav>
 
-<main class="container p-3">
+<main class="container p-3" style="height: 100%">
     <h2 class="text-center">
         Please fill the form to create your task:
     </h2>
 
-    <form id="signUpForm">
+    <form id="createTaskForm">
         <div class="mb-3">
-            <label class="form-label" for="username">Username:</label>
-            <input class="form-control" type="text" id="username" name="username" required>
+            <label class="form-label" for="title">Title:</label>
+            <input class="form-control" type="text" id="title" name="title" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="email">Email:</label>
-            <input class="form-control" type="email" id="email" name="email" required>
+            <label class="form-label" for="description">Description:</label>
+            <input class="form-control" type="text" id="description" name="description" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="password">Password:</label>
-            <input class="form-control" type="password" id="password" name="password" required>
+            <label for="status" class="form-label">Status:</label>
+            <select name="status" id="status" class="form-select">
+                <option value="PENDING">PENDING</option>
+                <option value="IN_PROGRESS">IN_PROGRESS</option>
+                <option value="COMPLETED">COMPLETED</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="priority" class="form-label">Priority:</label>
+            <select name="priority" id="priority" class="form-select">
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+            </select>
         </div>
 
         <div class="text-center">
-            <button class="btn btn-success" type="submit">Sign Up</button>
+            <button class="btn btn-success" type="submit">Create Task</button>
         </div>
     </form>
 
@@ -51,7 +67,7 @@
     &copy; 2025 Daniil Dumshenko ToDo List. All rights reserved.
 </footer>
 
-<script src="../js/sign-up.js"></script>
+<script src="../js/createTask.js"></script>
 
 </body>
 </html>
