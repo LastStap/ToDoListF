@@ -1,7 +1,7 @@
 const token = localStorage.getItem("JWT");
 
-if (token != null && !window.location.href.includes("createTask.html")) {
-    location.href = "../pages/createTask.html";
+if (token == null) {
+    logout();
 }
 
 const createTaskForm = document.querySelector("#createTaskForm");
@@ -29,6 +29,7 @@ async function createTask() {
         description: description,
         status: status,
         priority: priority,
+        user_id: localStorage.getItem("userId")
     };
 
     const response = await fetch("http://localhost:8080/tasks", {
@@ -41,9 +42,8 @@ async function createTask() {
     });
 
     if (response.ok) {
-
         alert("Task created successfully.");
-        location.href = "../pages/tasks.html";
+        location.href = "/pages/tasks.html";
     } else {
         alert("Task creation Failed!");
     }

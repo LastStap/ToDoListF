@@ -1,7 +1,7 @@
 const token = localStorage.getItem("JWT");
 
 if (token != null) {
-    location.href = "../pages/tasks.html";
+    location.href = "/pages/tasks.html";
 }
 
 const loginForm = document.querySelector("#loginForm");
@@ -39,12 +39,17 @@ async function login() {
 
         const data = await response.json();
 
-        localStorage.setItem("JWT", data.token);
+        const jwt = data.token;
+
+        const parsedJwt = parseJwt(jwt);
+
+        localStorage.setItem("JWT", jwt);
+        localStorage.setItem("userId", parsedJwt.sub);
 
         alertsContainer.innerHTML = `<div class="alert alert-success">Login Successful!</div>`;
 
         setTimeout(function () {
-            location.href = "../pages/tasks.html"
+            location.href = "/pages/tasks.html"
         }, 2000);
 
     } else {
@@ -54,4 +59,12 @@ async function login() {
             </div>
         `;
     }
+}
+
+function parseJwt(token) {
+    const base64 = token.split('.')[1];
+
+    const payloadJson = atob(base64)
+
+    return JSON.parse(payloadJson);
 }

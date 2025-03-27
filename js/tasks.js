@@ -12,6 +12,7 @@ logoutButton.addEventListener("click", function() {
 
 function logout() {
     localStorage.removeItem("JWT");
+    localStorage.removeItem("userId");
     location.href = "/pages/login.html";
 }
 
@@ -57,7 +58,6 @@ async function getTasks() {
 }
 
 getTasks();
-
 
 async function deleteTask(taskId) {
     const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
